@@ -2,12 +2,25 @@
 #include <stdio.h>
 #include "stPila.h"
 
+#define VALOR_DIMENSIONAMIENTO_PILA 5
+
 void inicpila(Pila *p){
-    p->arreglo = (int*)malloc(50*sizeof(int));
+    p->arreglo = (int*)malloc(VALOR_DIMENSIONAMIENTO_PILA*sizeof(int));
+    p->dimension = VALOR_DIMENSIONAMIENTO_PILA;
+
+    if(p->arreglo == NULL){
+        printf("\nError al inicializar pila.\n");
+        return;
+    }
+
     p->posTope = 0;
 }
 
 void apilar(Pila *p, int dato){
+    if(p->posTope >= p->dimension){
+        p->arreglo = (int*)realloc(p->arreglo, (p->dimension + VALOR_DIMENSIONAMIENTO_PILA) * sizeof(int));
+        p->dimension += VALOR_DIMENSIONAMIENTO_PILA;
+    }
     p->arreglo[p->posTope] = dato;
     p->posTope += 1;
 }
@@ -42,4 +55,8 @@ void liberarpila(Pila *p){
     free(p->arreglo);
     p->arreglo = NULL;
     p->posTope = 0;
+}
+
+int pilavacia(Pila *p){
+    return (p->posTope == 0);
 }

@@ -4,6 +4,7 @@
 typedef struct stPila {
     int *arreglo;
     int posTope;
+    int dimension;
 } Pila;
 
 void inicpila(Pila *p);
@@ -13,5 +14,6 @@ int tope(Pila *p);
 int base(Pila *p);
 void mostrar(Pila *p);
 void liberarpila(Pila *p);
+int pilavacia(Pila *p);
 
 #endif // STPILA_H_INCLUDED
